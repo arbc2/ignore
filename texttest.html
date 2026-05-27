@@ -7,6 +7,8 @@
 
 <style>
 
+/* ===== PAGE ===== */
+
 body {
   background-color: #0d0d16;
   color: #b6a6ff;
@@ -14,7 +16,7 @@ body {
   text-align: center;
   margin: 0;
   padding: 40px;
-  padding-bottom: 80px;
+  padding-bottom: 90px;
   line-height: 1.7;
 }
 
@@ -43,88 +45,145 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ===== FIXED TICKER ===== */
+/* ===== YOUR ORIGINAL TICKER CODE ===== */
 
-.ticker-bar {
+* {
+  box-sizing: border-box;
+}
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.h-8 { height: 2rem; }
+.h-10 { height: 2.5rem; }
+.w-24 { width: 6rem; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+
+.flex-grow { flex-grow: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+.items-center { align-items: center; }
+.items-stretch { align-items: stretch; }
+
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+
+.z-10 { z-index: 10; }
+.-left-5 { left: -1.25rem; }
+.top-0 { top: 0; }
+
+.bg-black { background-color: #333; }
+.bg-white { background-color: #fff; }
+
+.bg-opacity-40 {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.text-white { color: #fff; }
+.text-black { color: #000; }
+
+.text-xs { font-size: 0.75rem; }
+
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+
+.opacity-50 { opacity: 0.5; }
+
+.uppercase { text-transform: none; }
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.mx-2 { margin: 0 0.5rem; }
+
+.px-1 { padding: 0 0.25rem; }
+.px-3 { padding: 0 0.75rem; }
+
+.pl-8 { padding-left: 2rem; }
+
+.border-2 { border-width: 2px; }
+.border-white { border-color: #fff; }
+
+.rounded-sm { border-radius: 0.125rem; }
+
+.overflow-hidden { overflow: hidden; }
+
+.max-w-full { max-width: 100%; }
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+/* ===== FIXED TICKER BAR ===== */
+
+#app {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 48px;
-  display: flex;
   z-index: 99999;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 -2px 15px rgba(0,0,0,0.4);
+  pointer-events: none;
 }
 
-/* LEFT LOGO */
-
-.left-box {
-  width: 82px;
-  min-width: 82px;
-  background: #222;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#app * {
+  pointer-events: auto;
 }
 
-.left-box img {
-  height: 62px;
-  margin-top: 4px;
-}
-
-/* SCROLLER */
-
-#ticker-container {
-  flex-grow: 1;
-  overflow: hidden;
-  background: rgba(0,0,0,0.82);
-  display: flex;
-  align-items: center;
-}
-
-#scroller {
-  display: inline-block;
-  white-space: nowrap;
-  animation: ticker 60s linear infinite;
-}
-
-.ticker-item {
-  color: white;
-  font-size: 12px;
-  margin: 0 12px;
-  white-space: nowrap;
-  letter-spacing: 0.5px;
-}
-
-/* RIGHT USER */
-
-.right-box {
-  background: white;
-  color: black;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  font-size: 11px;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-/* ANIMATION */
+/* ===== ANIMATION ===== */
 
 @keyframes ticker {
-
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
 
   100% {
     transform: translateX(-50%);
   }
-
 }
 
-/* MOBILE */
+.username-section {
+  min-width: 90px;
+  max-width: 160px;
+  width: auto;
+}
+
+.avatar-container {
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.5));
+}
+
+.avatar-icon {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transform: rotate(-12deg);
+  border: 3px solid white;
+}
+
+.ticker-item {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+#scroller {
+  animation: ticker 60s linear infinite;
+  will-change: transform;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#ticker-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== MOBILE ===== */
 
 @media (max-width: 700px) {
 
@@ -133,22 +192,12 @@ a:hover {
     padding-bottom: 80px;
   }
 
-  .right-box {
+  .username-section {
     display: none;
   }
 
-  .left-box {
-    width: 64px;
-    min-width: 64px;
-  }
-
-  .left-box img {
-    height: 50px;
-  }
-
-  .ticker-item {
-    font-size: 10px;
-    margin: 0 8px;
+  .w-24 {
+    width: 4rem;
   }
 
 }
@@ -213,64 +262,150 @@ send us your idea for a show
 
 </div>
 
-<!-- FIXED TICKER -->
+<!-- ===== YOUR ACTUAL TICKER ===== -->
 
-<div class="ticker-bar">
+<div id="app" class="w-full flex flex-col justify-end">
 
-  <div class="left-box">
-    <img src="https://cabletwo.net/home/sphere.gif">
-  </div>
+  <div class="w-full relative h-10 flex items-stretch">
 
-  <div id="ticker-container">
-    <div id="scroller"></div>
-  </div>
+    <div class="flex-shrink-0 w-24 h-full flex items-center justify-center bg-black">
 
-  <div class="right-box" id="username">
-    ARBY
+      <div class="h-full w-full flex items-center justify-center">
+
+        <img
+          src="https://cabletwo.net/home/sphere.gif"
+          alt="C2 Logo"
+          class="h-8 max-w-full"
+          style="margin-bottom:15px; height:80px; filter: brightness(1.1);"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="flex-grow h-full relative bg-black bg-opacity-40" id="ticker-container">
+
+      <div class="h-full flex items-center relative">
+
+        <div id="scroller"></div>
+
+      </div>
+
+    </div>
+
+    <div class="flex-shrink-0 bg-white h-full flex items-center justify-center px-3 pl-8 relative username-section">
+
+      <div class="absolute -left-5 top-0 h-full z-10 avatar-container">
+
+        <div class="h-full aspect-square border-2 border-white rounded-sm overflow-hidden avatar-icon">
+
+          <img
+            src="https://cdn.bsky.app/img/avatar/plain/did:plc:ckbymy6wuguhn6pltovicir2/bafkreihz5oigpn7zzjtnolq33yofjynjlgaz2hf3rs45pof4criwx7hiwu@jpeg"
+            alt="User Avatar"
+            style="width: 100%; height: 100%; object-fit: cover;"
+          />
+
+        </div>
+
+      </div>
+
+      <div
+        id="username"
+        class="text-black font-bold text-xs uppercase tracking-wide whitespace-nowrap px-1"
+      >
+        ARBY
+      </div>
+
+    </div>
+
   </div>
 
 </div>
 
 <script>
 
-const items = [
+const SHEET_CSV_URL =
+'https://docs.google.com/spreadsheets/d/e/2PACX-1vTmM1LgcheYsnOs0LACPBwWLh4kjzMWiy2SnDUQpcRYT_An9qBiKg2BtsCvxo1ecXpP9uqCBQrtenRQ/pub?gid=0&single=true&output=csv';
 
-  'VISIT CABLETWO.NET',
-  'LIVE NOW',
-  'WARP ZONE',
-  'FANTASY FLIGHT',
-  'COMMUNITY TV',
-  'WATCH LIVE',
-  'MUCH LATER',
-  'SUBMIT YOUR SHOW',
-  'STAY TUNED',
-  'CABLE TWO FOREVER'
+document.addEventListener('DOMContentLoaded', function() {
 
-];
+  const username = 'ARBY';
 
-const scroller = document.getElementById('scroller');
+  document.getElementById('username').textContent = username;
 
-const duplicated = [...items, ...items];
+  loadTickerItemsFromSheet();
 
-duplicated.forEach((item, i) => {
+});
 
-  const span = document.createElement('span');
-  span.className = 'ticker-item';
-  span.textContent = item;
-  scroller.appendChild(span);
+async function loadTickerItemsFromSheet() {
 
-  if (i < duplicated.length - 1) {
+  try {
 
-    const dot = document.createElement('span');
-    dot.className = 'ticker-item';
-    dot.style.opacity = '0.45';
-    dot.textContent = '•';
+    const res = await fetch(SHEET_CSV_URL);
 
-    scroller.appendChild(dot);
+    const text = await res.text();
+
+    const rows = text.split('\n')
+      .map(r => r.trim())
+      .filter(r => r.length > 0);
+
+    if (!rows.length)
+      throw new Error('no rows in sheet');
+
+    initTicker(rows);
+
+  } catch (err) {
+
+    console.error('ticker sheet error:', err);
+
+    initTicker([
+      'VISIT CABLETWO.NET',
+      'WED 5PM',
+      'WARP ZONE',
+      'LATER',
+      'FANTASY FLIGHT',
+      'MUCH LATER',
+      'STAY TUNED FOR MORE ON C2'
+    ]);
 
   }
 
-});
+}
+
+function initTicker(tickerItems) {
+
+  const scroller = document.getElementById('scroller');
+
+  scroller.innerHTML = '';
+
+  const duplicatedItems = [...tickerItems, ...tickerItems];
+
+  duplicatedItems.forEach((item, index) => {
+
+    const span = document.createElement('span');
+
+    span.className =
+      'text-white font-medium text-xs uppercase mx-2 ticker-item';
+
+    span.textContent = item;
+
+    scroller.appendChild(span);
+
+    if (index < duplicatedItems.length - 1) {
+
+      const dot = document.createElement('span');
+
+      dot.className = 'text-white opacity-50 mx-2';
+
+      dot.textContent = '•';
+
+      scroller.appendChild(dot);
+
+    }
+
+  });
+
+}
 
 </script>
 

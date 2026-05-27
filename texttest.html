@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>cable two</title>
+
 <style>
 body {
   background-color: #0d0d16;
@@ -17,23 +18,67 @@ body {
   margin: auto;
 }
 
-h1 {
-  color: #ffffff;
-  font-size: 28px;
-  margin-bottom: 20px;
+/* ===== YOUR TICKER STYLES (slightly adapted so it doesn't take over page) ===== */
+
+.ticker-bar {
+  width: 100%;
+  height: 40px;
+  margin: 30px 0;
+  display: flex;
 }
 
-.section {
-  margin-top: 40px;
+.left-box {
+  width: 80px;
+  background: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.left-box img {
+  height: 50px;
+}
+
+#ticker-container {
+  flex-grow: 1;
+  overflow: hidden;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+}
+
+#scroller {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 60s linear infinite;
+}
+
+.ticker-item {
+  color: white;
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+.right-box {
+  background: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== normal page ===== */
 
 a {
   color: #8fffd1;
   text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 .divider {
@@ -48,6 +93,21 @@ a:hover {
 
 <h1>it's cable two</h1>
 
+<!-- ✦ YOUR TICKER INSERTED HERE ✦ -->
+<div class="ticker-bar">
+
+  <div class="left-box">
+    <img src="https://cabletwo.net/home/sphere.gif">
+  </div>
+
+  <div id="ticker-container">
+    <div id="scroller"></div>
+  </div>
+
+  <div class="right-box" id="username">ARBY</div>
+
+</div>
+
 <p>
 a television network<br>
 exploring the possibilities<br>
@@ -61,58 +121,38 @@ Cable Two isn't a name.<br>
 It's a threat and a promise.
 </p>
 
-<p>
-it's a media project<br>
-it's a collaborative community<br>
-it's a place
-</p>
-
-<p>
-all you have to do to get involved<br>
-is say hi
-</p>
-
-<div class="section">
-<p><a href="#">watch live</a></p>
-<p><a href="#">highlights</a></p>
-<p><a href="#">schedule</a></p>
-<p><a href="#">pitch</a></p>
-<p><a href="#">support</a></p>
-<p><a href="#">contact</a></p>
 </div>
 
-<div class="divider">✦ ✦ ✦</div>
+<script>
+const items = [
+  'VISIT CABLETWO.NET',
+  'WED 5PM',
+  'WARP ZONE',
+  'LATER',
+  'FANTASY FLIGHT',
+  'MUCH LATER',
+  'STAY TUNED FOR MORE ON C2'
+];
 
-<div class="section">
-<p><strong>what's new?</strong></p>
-<p>something is always happening</p>
-</div>
+const scroller = document.getElementById('scroller');
 
-<div class="section">
-<p><strong>this week</strong></p>
-<p>tune in and see what happens</p>
-</div>
+const duplicated = [...items, ...items];
 
-<div class="divider">✦ ✦ ✦</div>
+duplicated.forEach((item, i) => {
+  const span = document.createElement('span');
+  span.className = 'ticker-item';
+  span.textContent = item;
+  scroller.appendChild(span);
 
-<div class="section">
-<p><strong>connect with us</strong></p>
-<p>
-twitch · twitter · instagram · youtube<br>
-join the discord and say hi
-</p>
-</div>
+  if (i < duplicated.length - 1) {
+    const dot = document.createElement('span');
+    dot.className = 'ticker-item';
+    dot.style.opacity = '0.5';
+    dot.textContent = '•';
+    scroller.appendChild(dot);
+  }
+});
+</script>
 
-<div class="divider">✦ ✦ ✦</div>
-
-<div class="section">
-<p><strong>it's show time</strong></p>
-<p>
-want to make your digital dreams real?<br>
-send us your idea for a show
-</p>
-</div>
-
-</div>
 </body>
 </html>
